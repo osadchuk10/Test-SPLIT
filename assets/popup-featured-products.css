@@ -123,6 +123,24 @@
 .popup__product-sale-price-currency{
   font-weight: 600;
 }
+.popup::-webkit-scrollbar {
+  width: 10px;
+  background-color: #f5f5f5;
+}
+
+.popup::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 5px;
+  border: 2px solid #f5f5f5;
+}
+
+.popup::-webkit-scrollbar-track {
+  background-color: #eaeaea;
+}
+
+.popup::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
 @media screen and (max-width: 990px) {
   .popup {
     flex-direction: column;
