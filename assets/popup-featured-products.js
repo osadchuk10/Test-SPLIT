@@ -21,9 +21,9 @@ function popupSettings() {
   const discountPrice1 = ((1 - discount / 100) * Number(productOriginalPrice1)) / 100;
   const discountPrice2 = ((1 - discount / 100) * Number(productOriginalPrice2)) / 100;
 
-  productSalePrice1.textContent += discountPrice1;
-  productSalePrice2.textContent += discountPrice2;
-  popupMoney.textContent += result.toFixed(2);
+  productSalePrice1.textContent = discountPrice1;
+  productSalePrice2.textContent = discountPrice2;
+  popupMoney.textContent = result.toFixed(2);
 
   const openClosePopup = () => {
     successMessage.classList.remove('popup__success-message--active');

@@ -237,9 +237,9 @@
         <div class="popup__message">
           <span>You are trying to add <span class="popup__product-name"></span> to the cart.</span>
           <span
-            >Complete Your look and save
+            >Complete Your look and save <span class="popup__product-sale-price-currency">{{- localization.country.currency.symbol -}}</span>
             <span class="popup__product-money popup__product-sale-price">
-              {{- localization.country.currency.symbol -}}
+              
             </span>
           </span>
         </div>
@@ -269,8 +269,8 @@
                 {{ popup_settings.popup_product_1.selected_or_first_available_variant.sku }}
               </div>
               <div class="popup__product-price">
-                <span id="popup__product-sale-price-first" class="popup__product-sale-price">
-                  {{- localization.country.currency.symbol -}}</span
+                <span class="popup__product-sale-price-currency">{{- localization.country.currency.symbol -}}</span><span id="popup__product-sale-price-first" class="popup__product-sale-price">
+                  </span
                 ><span
                   class="popup__product-original-price"
                   id="Popup-Original-Price-First-Product"
@@ -310,8 +310,8 @@
                   {{ popup_settings.popup_product_2.selected_or_first_available_variant.sku }}
                 </div>
                 <div class="popup__product-price">
-                  <span id="popup__product-sale-price-second" class="popup__product-sale-price">
-                    {{- localization.country.currency.symbol -}}</span
+                  <span class="popup__product-sale-price-currency">{{- localization.country.currency.symbol -}}</span><span id="popup__product-sale-price-second" class="popup__product-sale-price">
+                    </span
                   ><span
                     class="popup__product-original-price"
                     id="Popup-Original-Price-Second-Product"

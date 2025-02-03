@@ -120,6 +120,9 @@
   font-weight: 600;
   margin-right: 20px;
 }
+.popup__product-sale-price-currency{
+  font-weight: 600;
+}
 @media screen and (max-width: 990px) {
   .popup {
     flex-direction: column;
