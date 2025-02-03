@@ -1,0 +1,151 @@
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  padding: 40px;
+  display: flex;
+  flex-direction: row;
+  background: floralwhite;
+  gap: 15px;
+  z-index: 9999;
+  max-width: 900px;
+  max-height: 85%;
+  overflow: auto;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.popup--active {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.popup__image {
+  display: flex;
+  height: auto;
+  border-radius: 8px;
+  flex: 1;
+}
+.popup__image img {
+  width: 100%;
+  height: auto;
+}
+.popup__description {
+  flex: 1;
+}
+
+.popup__product-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.popup__product-item {
+  display: flex;
+}
+
+.popup__close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.popup__close svg {
+  width: 24px;
+  height: 24px;
+}
+.popup__product-item svg {
+  max-width: 100px;
+}
+.popup__buttons {
+  display: flex;
+  gap: 10px;
+}
+.popup__message {
+  display: flex;
+  flex-direction: column;
+}
+.popup__product-subheading p,
+.popup__product-sku {
+  font-size: 1.2rem;
+  margin: 0;
+}
+.popup__product-title {
+  font-weight: 600;
+}
+.popup__message {
+  margin: 20px 0;
+}
+.popup__product-description {
+  text-align: left;
+}
+.popup__buttons {
+  margin: 20px 0;
+}
+.button {
+  width: 100%;
+}
+.popup__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+  display: none;
+}
+.popup__product-name {
+  font-weight: 600;
+}
+.popup__success-message {
+  display: none;
+}
+.popup__success-message--active {
+  display: block;
+}
+.popup__product-original-price {
+  text-decoration: line-through;
+}
+.popup__product-sale-price {
+  font-weight: 600;
+  margin-right: 20px;
+}
+@media screen and (max-width: 990px) {
+  .popup {
+    flex-direction: column;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .popup__image {
+    display: flex;
+    justify-content: center;
+  }
+  .popup__image img {
+    max-width: 400px;
+  }
+  .popup__buttons {
+    display: flex;
+    flex-direction: column;
+  }
+  .popup__description {
+    text-align: center;
+  }
+  .popup__product-container {
+    align-items: start;
+  }
+}
+@media screen and (min-width: 600px) and (max-width: 990px) {
+  .popup {
+    width: 70%;
+  }
+}

@@ -143,7 +143,7 @@ body:has(.section-header .drawer-menu) .announcement-bar-section .page-width {
 
 .isolate {
   position: relative;
-  z-index: 0;
+  z-index: auto;
 }
 
 .section + .section {

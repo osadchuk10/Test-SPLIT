@@ -4,6 +4,9 @@
 {{ 'component-slider.css' | asset_url | stylesheet_tag }}
 {{ 'template-collection.css' | asset_url | stylesheet_tag }}
 
+{{ 'popup-featured-products.css' |  asset_url | stylesheet_tag }}
+
+
 {% if section.settings.image_shape == 'blob' %}
   {{ 'mask-blobs.css' | asset_url | stylesheet_tag }}
 {%- endif -%}
@@ -195,7 +198,161 @@
       {{ 'mask-arch.svg' | inline_asset_content }}
     {%- endif -%}
   </div>
+
+  {% assign popup_settings = section.settings %}
+  {% if popup_settings.enable_popup %}
+    <div class="popup__overlay"></div>
+    <div class="popup" data-show-once = {{ popup_settings.show_once }}>
+      <button class="popup__close">
+        <svg width="24px" height="24px" viewBox="-0.5 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 21.32L21 3.32001" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M3 3.32001L21 21.32" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </button>
+
+      <div class="popup__image">
+        {% if section.index > 2 %}
+          {% assign loading = 'lazy' %}
+        {% else %}
+          {% assign loading = 'eager' %}
+        {% endif %}
+        {%- assign widths = '165, 360, 535, 750, 1070, 1500' -%}
+        {%- capture sizes -%}
+              (min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px,
+              (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)
+            {%- endcapture -%}
+        {% if popup_settings.popup_image != blank %}
+          {{
+            popup_settings.popup_image
+            | image_url: width: 450, height: 450, crop: 'center'
+            | image_tag: sizes: sizes, widths: widths, loading: loading
+          }}
+        {%- else %}
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        {% endif %}
+      </div>
+      <div class="popup__description">
+        <div class="popup__heading">
+          <h2 class="h2">{{ popup_settings.popup_title }}</h2>
+        </div>
+        <div class="popup__message">
+          <span>You are trying to add <span class="popup__product-name"></span> to the cart.</span>
+          <span
+            >Complete Your look and save
+            <span class="popup__product-money popup__product-sale-price">
+              {{- localization.country.currency.symbol -}}
+            </span>
+          </span>
+        </div>
+        <div class="popup__product-container">
+          <div class="popup__product-item">
+            {% if popup_settings.popup_product_1.featured_image != blank %}
+              {% assign id_1 = popup_settings.popup_product_1.selected_or_first_available_variant.id %}
+
+              <div class="popup__product-image">
+                <a href="{{ popup_settings.popup_product_1.url }}">
+                  {{ popup_settings.popup_product_1.featured_image | image_url: width: 100 | image_tag }}
+                </a>
+              </div>
+            {% else %}
+              {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            {% endif %}
+
+            <div class="popup__product-description">
+              <div class="popup__product-title">
+                <a href="{{ popup_settings.popup_product_1.url }}" class="full-unstyled-link">
+                  {{- popup_settings.popup_product_1.title -}}
+                </a>
+              </div>
+              <div class="popup__product-subheading">{{ popup_settings.popup_product_1.description }}</div>
+              <div class="popup__product-sku">
+                SKU:
+                {{ popup_settings.popup_product_1.selected_or_first_available_variant.sku }}
+              </div>
+              <div class="popup__product-price">
+                <span id="popup__product-sale-price-first" class="popup__product-sale-price">
+                  {{- localization.country.currency.symbol -}}</span
+                ><span
+                  class="popup__product-original-price"
+                  id="Popup-Original-Price-First-Product"
+                  data-price="{{popup_settings.popup_product_1.selected_or_first_available_variant.price}}"
+                >
+                  {{-
+                    popup_settings.popup_product_1.selected_or_first_available_variant.price
+                    | money_without_trailing_zeros
+                  -}}
+                </span>
+              </div>
+            </div>
+          </div>
+
+         
+            <div class="popup__product-item">
+              {% if popup_settings.popup_product_2.featured_image != blank %}
+                {% assign id_2 = popup_settings.popup_product_2.selected_or_first_available_variant.id %}
+
+                <div class="popup__product-image">
+                  <a href="{{ popup_settings.popup_product_2.url }}">
+                    {{ popup_settings.popup_product_2.featured_image | image_url: width: 100 | image_tag }}</a>
+                </div>
+              {% else %}
+                {{ 'product-2' | placeholder_svg_tag: 'placeholder-svg' }}
+              {% endif %}
+
+              <div class="popup__product-description">
+                <div class="popup__product-title">
+                  <a href="{{ popup_settings.popup_product_2.url }}" class="full-unstyled-link">
+                    {{- popup_settings.popup_product_2.title -}}
+                  </a>
+                </div>
+                <div class="popup__product-subheading">{{ popup_settings.popup_product_2.description }}</div>
+                <div class="popup__product-sku">
+                  SKU:
+                  {{ popup_settings.popup_product_2.selected_or_first_available_variant.sku }}
+                </div>
+                <div class="popup__product-price">
+                  <span id="popup__product-sale-price-second" class="popup__product-sale-price">
+                    {{- localization.country.currency.symbol -}}</span
+                  ><span
+                    class="popup__product-original-price"
+                    id="Popup-Original-Price-Second-Product"
+                    data-price="{{popup_settings.popup_product_2.selected_or_first_available_variant.price}}"
+                  >
+                    {{-
+                      popup_settings.popup_product_2.selected_or_first_available_variant.price
+                      | money_without_trailing_zeros
+                    -}}
+                  </span>
+                </div>
+              </div>
+            </div>
+          
+        </div>
+        <div class="popup__buttons">
+          <div class="popup__button popup__button--add-to-cart">
+            <button
+              class="button button--primary"
+              id="addToCartPopupButton"
+              data-id1="{{ id_1 }}"
+              data-id2="{{ id_2 }}"
+            >
+              Add to Cart
+            </button>
+          </div>
+          <div class="popup__button popup__button--cart">
+            <a href="/cart" class="button button--secondary">Continue to the Cart</a>
+          </div>
+        </div>
+        <div class="popup__success-message">
+          <h2 class="h2">Products has been succesfully added to the cart</h2>
+        </div>
+      </div>
+    </div>
+  {% endif %}
 </div>
+
+<script src="{{ 'popup-featured-products.js' | asset_url }}" defer></script>
+
+
 
 {% schema %}
 {
@@ -469,6 +626,43 @@
       "id": "swipe_on_mobile",
       "default": false,
       "label": "t:sections.featured-collection.settings.swipe_on_mobile.label"
+    },
+    {
+      "type": "header",
+      "content": "Popup Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_popup",
+      "label": "Enable popup",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "popup_image",
+      "label": "Popup image"
+    },
+    {
+      "type": "text",
+      "id": "popup_title",
+      "label": "Popup Heading",
+      "default": "Complete Your Purchase"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_once",
+      "default": true,
+      "label": "Show only once per customer"
+    },
+    {
+      "type": "product",
+      "id": "popup_product_1",
+      "label": "Popup Product 1"
+    },
+    {
+      "type": "product",
+      "id": "popup_product_2",
+      "label": "Popup Product 2"
     },
     {
       "type": "header",
