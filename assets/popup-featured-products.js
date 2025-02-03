@@ -3,7 +3,7 @@ events.forEach((event) => {
   document.addEventListener(event, popupSettings);
 });
 function popupSettings() {
-  const showOnce = document.querySelector('.popup').getAttribute('data-show-once') === 'true';
+  const showOnce = document.querySelector('.popup').getAttribute('data-show-once') === 'true';  
   const popup = document.querySelector('.popup');
   const close = document.querySelector('.popup__close');
   const overlay = document.querySelector('.popup__overlay');
@@ -27,14 +27,14 @@ function popupSettings() {
 
   const openClosePopup = () => {
     successMessage.classList.remove('popup__success-message--active');
-    console.log(typeof(showOnce));
+  
     if (showOnce && localStorage.getItem('popupShown') === 'true') {
       return;
     }
     
 
     let productTitle = '';
-    console.log('sdsdsdsds',productTitle);
+  
     
     productInfo.forEach(item => {
       item.addEventListener('click', () => {
@@ -67,7 +67,7 @@ function popupSettings() {
 
 
   document.querySelectorAll('product-form .quick-add__submit').forEach(button => {
-    console.log(button);
+   
     
     button.addEventListener('click', openClosePopup);
   });
